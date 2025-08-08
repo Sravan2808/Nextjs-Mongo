@@ -20,7 +20,16 @@ export default function LoginPage() {
       const response = await axios.post("/api/users/login", user);
       toast.success("Login successful");
       console.log("Login Success", response.data);
-      router.push("/profile");
+      console.log("About to redirect to /profile");
+
+      // Try router.push first, then fallback to window.location
+      try {
+        await router.push("/profile");
+        console.log("Router push successful");
+      } catch (routerError) {
+        console.log("Router push failed, using window.location", routerError);
+        window.location.href = "/profile";
+      }
     } catch (error: any) {
       console.log("Login Failed", error);
       const errorMessage =
