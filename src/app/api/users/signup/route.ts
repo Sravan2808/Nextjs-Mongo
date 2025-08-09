@@ -17,7 +17,7 @@ export async function POST(request: NextRequest) {
     if (!username || !email || !password) {
       return NextResponse.json(
         {
-          : "Missing required fields",
+          error: "Missing required fields",
           message: "Username, email, and password are required",
         },
         { status: 400 }
